@@ -1,41 +1,48 @@
-def celsius_to_fahrenheit(c):
-    return (c * 9/5) + 32
+def celsius_to_fahrenheit(celsius):
+    return (celsius * 9/5) + 32
 
-def celsius_to_kelvin(c):
-    return c + 273.15
+def celsius_to_kelvin(celsius):
+    return celsius + 273.15
 
-def fahrenheit_to_celsius(f):
-    return (f - 32) * 5/9
+def fahrenheit_to_celsius(fahrenheit):
+    return (fahrenheit - 32) * 5/9
 
-def fahrenheit_to_kelvin(f):
-    return (f - 32) * 5/9 + 273.15
+def fahrenheit_to_kelvin(fahrenheit):
+    return (fahrenheit - 32) * 5/9 + 273.15
 
-def kelvin_to_celsius(k):
-    return k - 273.15
+def kelvin_to_celsius(kelvin):
+    return kelvin - 273.15
 
-def kelvin_to_fahrenheit(k):
-    return (k - 273.15) * 9/5 + 32
+def kelvin_to_fahrenheit(kelvin):
+    return (kelvin - 273.15) * 9/5 + 32
 
-print("Temperature Converter")
-print("Choose the input unit:")
-print("1. Celsius")
-print("2. Fahrenheit")
-print("3. Kelvin")
+def convert_temperature(value, unit):
+    unit = unit.lower()
+    if unit == 'c':
+        f = celsius_to_fahrenheit(value)
+        k = celsius_to_kelvin(value)
+        print(f"\n{value}°C is equal to:")
+        print(f"{f:.2f}°F")
+        print(f"{k:.2f}K")
+    elif unit == 'f':
+        c = fahrenheit_to_celsius(value)
+        k = fahrenheit_to_kelvin(value)
+        print(f"\n{value}°F is equal to:")
+        print(f"{c:.2f}°C")
+        print(f"{k:.2f}K")
+    elif unit == 'k':
+        c = kelvin_to_celsius(value)
+        f = kelvin_to_fahrenheit(value)
+        print(f"\n{value}K is equal to:")
+        print(f"{c:.2f}°C")
+        print(f"{f:.2f}°F")
+    else:
+        print("Invalid unit. Please use 'C' for Celsius, 'F' for Fahrenheit, or 'K' for Kelvin.")
 
-choice = input("Enter your choice (1/2/3): ")
-temp = float(input("Enter the temperature value: "))
-
-if choice == '1':
-    print(f"Input: {temp}°C")
-    print(f"Fahrenheit: {celsius_to_fahrenheit(temp):.2f}°F")
-    print(f"Kelvin: {celsius_to_kelvin(temp):.2f}K")
-elif choice == '2':
-    print(f"Input: {temp}°F")
-    print(f"Celsius: {fahrenheit_to_celsius(temp):.2f}°C")
-    print(f"Kelvin: {fahrenheit_to_kelvin(temp):.2f}K")
-elif choice == '3':
-    print(f"Input: {temp}K")
-    print(f"Celsius: {kelvin_to_celsius(temp):.2f}°C")
-    print(f"Fahrenheit: {kelvin_to_fahrenheit(temp):.2f}°F")
-else:
-    print("Invalid choice. Please enter 1, 2, or 3.")
+# Main program
+try:
+    temp = float(input("Enter the temperature value: "))
+    unit = input("Enter the unit of temperature (C/F/K): ").strip()
+    convert_temperature(temp, unit)
+except ValueError:
+    print("Invalid input. Please enter a numeric temperature value.")
